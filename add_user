@@ -1,0 +1,29 @@
+#!/usr/bin/python3
+import json
+
+print("add user".center(20))
+payload = {}
+
+name = input("name: ")
+tel_id = input("telegram id: ")
+part_of_the_city = input("part of the city: ")
+starter = input("starter sentence (Optional): ")
+ending = input("ending of the sentence (Optional): ")
+
+payload["name"] = name
+payload["tel_id"] = tel_id
+payload["part_of_the_city"] = part_of_the_city
+
+if starter:
+    payload["starter"] = starter
+if ending:
+    payload["ending"] = ending
+
+with open("users.json", "r", encoding="utf-8") as file:
+    data = json.load(file)
+
+data.append(payload)
+
+with open("users.json", "w", encoding="utf-8") as file:
+    json.dump(data, file, ensure_ascii=False, indent=4)
+
