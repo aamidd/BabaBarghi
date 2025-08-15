@@ -13,14 +13,13 @@ api_hash = os.getenv("API_HASH")
 channel_username = "babolsartoday"
 n8n_webhook_url = os.getenv("N8N_WEBHOOK_URL")
 
-print(api_id)
-print(api_hash)
-print(n8n_webhook_url)
-
 client = TelegramClient("anon", api_id, api_hash)
 
 l = "لیست"
 kh = "خاموشی"
+JOME = "جمعه"
+SHANBEH = "شنبه"
+rooz = False
 
 
 async def find_message():
@@ -39,12 +38,18 @@ async def find_message():
 
 
 async def post_to(ids, tel_id, part_of_the_city, starter, ending):
+    rooz = False
     final_text = ""
     if starter:
         final_text = f"{random.choice(starter)}\n"
     for i in ids:
         message = await client.get_messages(channel_username, ids=i)
         for part in message.message.split("\n"):
+            if not rooz and (JOME in part or SHANBEH in part):
+                for p in part.split():
+                    if JOME in p or SHANBEH in p:
+                        final_text += f"فردا {p}\n"
+                        rooz = True
             if part.strip():
                 if part_of_the_city in part:
                     final_text += f"{part.split()[0]} تا {part.split()[1]}\n"
