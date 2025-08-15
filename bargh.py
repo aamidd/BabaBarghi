@@ -28,7 +28,7 @@ async def find_message():
     async for message in client.iter_messages(channel_username, limit=20):
         if str(message.id) in messageid:
             break
-        if l in str(message.text) and kh in str(message.text):
+        if L in str(message.text) and KH in str(message.text):
             ids.append(message.id)
     if ids:
         with open("id", "a") as mid:
