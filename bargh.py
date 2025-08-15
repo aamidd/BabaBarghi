@@ -15,11 +15,10 @@ n8n_webhook_url = os.getenv("N8N_WEBHOOK_URL")
 
 client = TelegramClient("anon", api_id, api_hash)
 
-l = "لیست"
-kh = "خاموشی"
+L = "لیست"
+KH = "خاموشی"
 JOME = "جمعه"
 SHANBEH = "شنبه"
-rooz = False
 
 
 async def find_message():
