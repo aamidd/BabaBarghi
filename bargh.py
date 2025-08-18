@@ -47,7 +47,7 @@ async def post_to(ids, tel_id, part_of_the_city, starter, ending):
             if not rooz and (JOME in part or SHANBEH in part):
                 for p in part.split():
                     if JOME in p or SHANBEH in p:
-                        final_text += f"فردا {p}\n"
+                        final_text += f"{p}\n"
                         rooz = True
             if part.strip():
                 if part_of_the_city in part:
