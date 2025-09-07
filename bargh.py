@@ -19,6 +19,7 @@ L = "لیست"
 KH = "خاموشی"
 JOME = "جمعه"
 SHANBEH = "شنبه"
+BABOLSAR = "بابلسر"
 
 
 async def find_message():
@@ -28,7 +29,7 @@ async def find_message():
     async for message in client.iter_messages(channel_username, limit=20):
         if str(message.id) in messageid:
             break
-        if L in str(message.text) and KH in str(message.text):
+        if L in str(message.text) and KH in str(message.text) and BABOLSAR in str(message.text):
             ids.append(message.id)
     if ids:
         with open("id", "a") as mid:
