@@ -39,6 +39,7 @@ async def find_message():
 
 async def post_to(ids, tel_id, part_of_the_city, starter, ending):
     rooz = False
+    found = False
     final_text = ""
     if starter:
         final_text = f"{random.choice(starter)}\n"
@@ -52,10 +53,12 @@ async def post_to(ids, tel_id, part_of_the_city, starter, ending):
                         rooz = True
             if part.strip():
                 if part_of_the_city in part:
+                    found = True
                     final_text += f"{part.split()[0]} تا {part.split()[1]}\n"
-    final_text += ending
-    payload = {"message": final_text, "tel_id": tel_id}
-    requests.post(n8n_webhook_url, json=payload)
+    if found:
+        final_text += ending
+        payload = {"message": final_text, "tel_id": tel_id}
+        requests.post(n8n_webhook_url, json=payload)
 
 
 async def main():
